@@ -14,3 +14,10 @@
         .then(function(response) {
             console.log(JSON.stringify(response))
         })
+
+
+
+        //use the todo list activity to append
+
+        //use the same kind of event listener from the working.movie.app 
+        //to set the search history cities click request
