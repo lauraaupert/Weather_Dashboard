@@ -48,7 +48,7 @@ function renderHistory() {
     for (i = 0; i < cities.length; i++) {
         var history = cities[i]
         
-        var newCity = document.createElement("li")
+        var newCity = document.createElement("button")
         newCity.textContent = history;
         newCity.setAttribute("data-index", i);
         newCity.classList.add("list-group-item")
