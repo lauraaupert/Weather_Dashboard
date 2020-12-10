@@ -13,6 +13,13 @@
         // We store all of the retrieved data inside of an object called "response"
         .then(function(response) {
             console.log(JSON.stringify(response))
+            $(".city").html("<h2>" + response.name + "</h2>");
+            $(".wind").text("Wind Speed: " + response.wind.speed);
+            $(".humidity").text("Humidity: " + response.main.humidity);
+            var tempF = (response.main.temp - 273.15) * 1.80 + 32;
+            console.log(tempF)
+            $(".temp").text("Temperature (F): " + tempF.toFixed(2));
+    
         })
 
 
