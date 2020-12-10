@@ -52,33 +52,16 @@ function renderHistory() {
         newCity.textContent = history;
         newCity.setAttribute("data-index", i);
         newCity.classList.add("list-group-item")
+        newCity.classList.add("history-city")
 
         $(".history").prepend(newCity);
     }
 
 
-/*
-    $.each(cities, function(i, value) {
-        console.log(value)
-
-        var newCity = $("<li/>",
-        {
-          text: value
-        }
-         
-         //myButton.text(value).append("#buttons-view")
-        
-      )
-      $(".history").append(newCity)
-    })
-    */
-
  }
         
+ $(document).on("click", ".history-city", queryCity);
 
-        //use the todo list activity to append
 
-        //use the same kind of event listener from the working.movie.app 
-        //to set the search history cities click request
 
 })
