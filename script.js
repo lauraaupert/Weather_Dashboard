@@ -26,7 +26,7 @@ $(document).ready(function(){
             $(".city").empty()
 
            // var city = $(this).attr("data-name")
-        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cities[0] + "&cnt=5&appid=" + APIKey;
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cities[0] + "&cnt=6&appid=" + APIKey;
         $.ajax({
         url: queryURL,
         method: "GET"
@@ -37,10 +37,18 @@ $(document).ready(function(){
             //WILL NEED TO REFORMAT DATE DISPLAY
             $(".city").html("<h2>" + response.city.name + " (" + response.list[0].dt_txt + ")" + "</h2>");
             $(".wind").text("Wind Speed: " + response.list[0].wind.speed);
-            $(".humidity").text("Humidity: " + response.list[0].main.humidity);
+            $(".humidity").text("Humidity: " + response.list[0].main.humidity + "%");
             var tempF = (response.list[0].main.temp - 273.15) * 1.80 + 32;
             console.log(tempF)
             $(".temp").text("Temperature: " + tempF.toFixed(2) + "F");
+
+            for ( i = 1; i < 6; i++) {
+                console.log(response.list[i].main.humidity)
+                //var forecast = document.createElement("div")
+                //forecast.textContent = "Humidity: " + response.list[i].main.humidity
+                var forecast = $("<p>").html("Humidity: " + response.list[i].main.humidity + "%").addClass("list-group-item").attr("style", "width: 20%; float: left")
+               $(".forecast").append(forecast)
+            }
     
         })
     }
