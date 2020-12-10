@@ -14,7 +14,7 @@ h1 {
     text-align: left;
 }
 
-.btn-outline-secondary {
+#search {
     background-color: rgb(0, 110, 255);
     color: white;
 }
