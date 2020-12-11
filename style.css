@@ -29,3 +29,19 @@ h1 {
     text-align: left;
     font-size: small;
 }
+
+.low {
+    background-color: green;
+}
+
+.moderate {
+    background-color: yellow;
+}
+
+.high {
+    background-color: orange;
+}
+
+.very-high {
+    background-color: red;
+}

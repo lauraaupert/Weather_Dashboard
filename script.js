@@ -74,7 +74,17 @@ var cities = []
         method: "GET"
     }).then(function(response) {
         console.log(response)
-        $(".uv-index").text("UV Index: " + response.value);
+        //MUST ADD CLASS SO BACKGROUND CHANGES COLOR WITH IF STATEMENT
+        var index = $(".uv-index").text("UV Index: " + response.value);
+        if (response.value < 3) {
+            index.addClass("low")
+        } else if (response.value > 2 && response.value < 6) {
+            index.addClass("moderate")
+        } else if (response.value > 5 && response.value < 8) {
+            index.addClass("high")
+        } else if (response.value > 7) {
+            index.addClass("very-high")
+        }
 
     })
 }
