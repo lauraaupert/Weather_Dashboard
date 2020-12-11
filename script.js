@@ -22,6 +22,8 @@ var cities = []
             event.preventDefault();
             console.dir(event)
         var city = $("#city-input").val().trim();
+        $("#city-input").val("")
+        //city.attr("data-name", $("#city-input"))
         cities.push(city);
         console.log(city);
         console.log(cities);
