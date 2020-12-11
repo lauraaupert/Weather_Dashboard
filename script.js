@@ -35,7 +35,7 @@ var cities = []
 
 
            // var city = $(this).attr("data-name")
-        var queryURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + cities[0] + "&cnt=6&appid=" + APIKey;
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + cities[cities.length-1] + "&cnt=6&appid=" + APIKey;
         $.ajax({
         url: queryURL,
         method: "GET"
@@ -43,7 +43,6 @@ var cities = []
             console.log((response))
             //$(".display").empty()
             uvCities.push(response.city.coord)
-            console.log(uvCities)
 
             //WILL NEED TO REFORMAT DATE DISPLAY
             $(".city").html("<h2>" + response.city.name + "</h2>");
@@ -67,17 +66,19 @@ var cities = []
 
     function queryUV () {
         //uv index
-    var queryURLindex = "http://api.openweathermap.org/data/2.5/uvi?lat=" + uvCities[0].lat + "&lon=" + uvCities[0].lon + "&appid=" + APIKey
+    var queryURLindex = "http://api.openweathermap.org/data/2.5/uvi?lat=" + uvCities[cities.length-1].lat + "&lon=" + uvCities[cities.length-1].lon + "&appid=" + APIKey
 
     $.ajax({
         url: queryURLindex,
         method: "GET"
     }).then(function(response) {
         console.log(response)
-        //MUST ADD CLASS SO BACKGROUND CHANGES COLOR WITH IF STATEMENT
-        var index = $(".uv-index").text("UV Index: " + response.value);
+        //MUST fix CLASS SO BACKGROUND of numbers only CHANGES COLOR WITH IF STATEMENT
+        var UV = $(".uv-index")
+        UV.text("UV Index: ")
+        var index = UV.append(" " + response.value).addClass("list-group-item");
         if (response.value < 3) {
-            index.addClass("low")
+            index.attr("style", "background-color: green;")
         } else if (response.value > 2 && response.value < 6) {
             index.addClass("moderate")
         } else if (response.value > 5 && response.value < 8) {
@@ -87,7 +88,13 @@ var cities = []
         }
 
     })
+   
 }
+//for (i = 0; i < uvCities.length; i++) {
+  //  uvCities[i].attr("id", i)
+   // }
+    //console.log(uvCities)
+
 
 function renderHistory() {
     $(".history").empty();
@@ -99,10 +106,13 @@ function renderHistory() {
         newCity.setAttribute("data-name", i);
         newCity.classList.add("list-group-item")
         newCity.classList.add("history-city")
+        
+        console.log(uvCities)
 
         $(".history").prepend(newCity);
         console.log($("dataset"))
     }
+    console.log(newCity)
 
 
  }

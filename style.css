@@ -31,17 +31,21 @@ h1 {
 }
 
 .low {
+    padding: 0;
     background-color: green;
 }
 
 .moderate {
+    padding: 0;
     background-color: yellow;
 }
 
 .high {
+    padding: 0;
     background-color: orange;
 }
 
 .very-high {
+    padding: 0;
     background-color: red;
 }
