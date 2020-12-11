@@ -74,6 +74,8 @@ var cities = []
         method: "GET"
     }).then(function(response) {
         console.log(response)
+        $(".uv-index").text("UV Index: " + response.value);
+
     })
 }
 
