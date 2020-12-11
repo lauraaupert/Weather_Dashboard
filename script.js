@@ -130,3 +130,4 @@ function renderHistory() {
 
 
 })
+//next steps: local storage, icons
