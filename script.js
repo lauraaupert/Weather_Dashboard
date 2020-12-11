@@ -121,7 +121,9 @@ function renderHistory() {
  
         
  $(document).on("click", ".history-city", function (event) {
-    var city = $(this).attr("data-name");
+    var city = $(this).html();
+    cities.push(city)
+    console.log(cities)
   queryCity();
  })
 
