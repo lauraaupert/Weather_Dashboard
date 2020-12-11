@@ -12,9 +12,9 @@ $(document).ready(function(){
 //http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={API key}
 
 
-
-      var cities = [
-        //  berlin: {lat:}
+var cities = []
+    var uvCities = [
+        //{berlin: {lat: "52.5244", lon: "13.4105"}}
       ]
 
 
@@ -42,6 +42,8 @@ $(document).ready(function(){
         }).then(function(response) {
             console.log((response))
             //$(".display").empty()
+            uvCities.push(response.city.coord)
+            console.log(uvCities)
 
             //WILL NEED TO REFORMAT DATE DISPLAY
             $(".city").html("<h2>" + response.city.name + "</h2>");
@@ -59,17 +61,19 @@ $(document).ready(function(){
                 var forecast = $("<div>").html(response.list[i].dt_txt + "<br>" + "Humidity: " + response.list[i].humidity + "%" + "<br>" + "Temp: " + temp.toFixed(2) + "F").addClass("list-group-item").addClass("forecast-days")
                 $(".forecast").append(forecast)
             }
-    
+            queryUV()
         })
     }
 
     function queryUV () {
         //uv index
-//http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}
+    var queryURLindex = "http://api.openweathermap.org/data/2.5/uvi?lat=" + uvCities[0].lat + "&lon=" + uvCities[0].lon + "&appid=" + APIKey
 
     $.ajax({
         url: queryURLindex,
         method: "GET"
+    }).then(function(response) {
+        console.log(response)
     })
 }
 
