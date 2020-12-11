@@ -7,7 +7,15 @@ $(document).ready(function(){
     //var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&cnt=5&appid=" + APIKey;
    // var city = $("#city-input").val().trim();
       //request syntax
-      var cities = []
+
+      //airpollution url request
+//http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={API key}
+
+
+
+      var cities = [
+        //  berlin: {lat:}
+      ]
 
 
         $("#search").on("click", function(event) {
@@ -25,8 +33,9 @@ $(document).ready(function(){
         function queryCity() {
             $(".city").empty()
 
+
            // var city = $(this).attr("data-name")
-        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cities[0] + "&cnt=6&appid=" + APIKey;
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + cities[0] + "&cnt=6&appid=" + APIKey;
         $.ajax({
         url: queryURL,
         method: "GET"
@@ -35,23 +44,34 @@ $(document).ready(function(){
             //$(".display").empty()
 
             //WILL NEED TO REFORMAT DATE DISPLAY
-            $(".city").html("<h2>" + response.city.name + " (" + response.list[0].dt_txt + ")" + "</h2>");
-            $(".wind").text("Wind Speed: " + response.list[0].wind.speed);
-            $(".humidity").text("Humidity: " + response.list[0].main.humidity + "%");
-            var tempF = (response.list[0].main.temp - 273.15) * 1.80 + 32;
+            $(".city").html("<h2>" + response.city.name + "</h2>");
+            $(".wind").text("Wind Speed: " + response.list[0].speed);
+            $(".humidity").text("Humidity: " + response.list[0].humidity + "%");
+            var tempF = (response.list[0].temp.day - 273.15) * 1.80 + 32;
             console.log(tempF)
             $(".temp").text("Temperature: " + tempF.toFixed(2) + "F");
-
+            $(".forecast").empty()
             for ( i = 1; i < 6; i++) {
-                console.log(response.list[i].main.humidity)
+                console.log(response.list[i].humidity)
                 //var forecast = document.createElement("div")
                 //forecast.textContent = "Humidity: " + response.list[i].main.humidity
-                var forecast = $("<p>").html("Humidity: " + response.list[i].main.humidity + "%").addClass("list-group-item").attr("style", "width: 20%; float: left")
-               $(".forecast").append(forecast)
+                var temp = (response.list[i].temp.day - 273.15) * 1.80 + 32;
+                var forecast = $("<div>").html(response.list[i].dt_txt + "<br>" + "Humidity: " + response.list[i].humidity + "%" + "<br>" + "Temp: " + temp.toFixed(2) + "F").addClass("list-group-item").addClass("forecast-days")
+                $(".forecast").append(forecast)
             }
     
         })
     }
+
+    function queryUV () {
+        //uv index
+//http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}
+
+    $.ajax({
+        url: queryURLindex,
+        method: "GET"
+    })
+}
 
 function renderHistory() {
     $(".history").empty();
@@ -72,7 +92,10 @@ function renderHistory() {
  }
  
         
- $(document).on("click", ".history-city", queryCity);
+ $(document).on("click", ".history-city", function (event) {
+    var city = $(this).attr("data-name");
+  queryCity();
+ })
 
 
 

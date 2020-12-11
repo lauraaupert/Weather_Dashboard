@@ -18,3 +18,14 @@ h1 {
     background-color: rgb(0, 110, 255);
     color: white;
 }
+
+.forecast-days {
+    background-color: rgb(0, 110, 255);
+    margin: 1%;
+    border-radius: 15px;
+    width: 18%;
+    float: left;
+    color: white;
+    text-align: left;
+    font-size: small;
+}
