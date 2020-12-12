@@ -45,12 +45,13 @@ var cities = []
             console.log((response))
             //$(".display").empty()
             uvCities.push(response.city.coord)
-
+            var dateMain = new Date(response.list[0].dt * 1000).toDateString()
             //WILL NEED TO REFORMAT DATE DISPLAY
-            $(".city").html("<h2>" + response.city.name + "</h2>");
+            $(".city").html("<h2>" + response.city.name + "</h2>" + " (" + dateMain + ")");
             $(".wind").text("Wind Speed: " + response.list[0].speed);
             $(".humidity").text("Humidity: " + response.list[0].humidity + "%");
             var tempF = (response.list[0].temp.day - 273.15) * 1.80 + 32;
+
             console.log(tempF)
             $(".temp").text("Temperature: " + tempF.toFixed(2) + "F");
             $(".forecast").empty()
