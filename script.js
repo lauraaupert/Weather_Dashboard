@@ -56,10 +56,13 @@ var cities = []
             $(".forecast").empty()
             for ( i = 1; i < 6; i++) {
                 console.log(response.list[i].humidity)
+                var date = new Date(response.list[i].dt * 1000).toDateString()
+
+                console.log(date)
                 //var forecast = document.createElement("div")
                 //forecast.textContent = "Humidity: " + response.list[i].main.humidity
                 var temp = (response.list[i].temp.day - 273.15) * 1.80 + 32;
-                var forecast = $("<div>").html(response.list[i].dt_txt + "<br>" + "Humidity: " + response.list[i].humidity + "%" + "<br>" + "Temp: " + temp.toFixed(2) + "F").addClass("list-group-item").addClass("forecast-days")
+                var forecast = $("<div>").html(date + "<br>" + "Humidity: " + response.list[i].humidity + "%" + "<br>" + "Temp: " + temp.toFixed(2) + "F").addClass("list-group-item").addClass("forecast-days")
                 $(".forecast").append(forecast)
             }
             queryUV()
