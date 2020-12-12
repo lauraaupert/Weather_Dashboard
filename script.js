@@ -100,8 +100,13 @@ var cities = []
 
 function renderHistory() {
     $(".history").empty();
-    for (i = 0; i < cities.length; i++) {
-        var history = cities[i]
+    var newSet = new Set(cities)
+    console.log(newSet)
+    var historyList = Array.from(newSet)
+    console.log(historyList)
+for (i = 0; i < historyList.length; i++) {
+    
+        var history = historyList[i]
         
         var newCity = document.createElement("button")
         newCity.textContent = history;
@@ -109,25 +114,35 @@ function renderHistory() {
         newCity.classList.add("list-group-item")
         newCity.classList.add("history-city")
         
+        console.log(cities)
         console.log(uvCities)
-
-        $(".history").prepend(newCity);
-        console.log($("dataset"))
+            $(".history").prepend(newCity);
+        console.log($("data-name"))
+        if($.inArray(history, cities)) {
+            console.log($.inArray)
     }
     console.log(newCity)
 
 
  }
+}
  
         
  $(document).on("click", ".history-city", function (event) {
     var city = $(this).html();
+    console.log(city)
     cities.push(city)
+   // var history = cities.filter(function(value){ 
+        //return value = !city;
+        //history.push(city)
+    //});
     console.log(cities)
+    console.log(history)
   queryCity();
  })
 
 
 
 })
-//next steps: local storage, icons
+//next steps: local storage, icons, uv index background color, capitalize first letter of cities in history
+//must take care of double values in the array Line 125 only partly solves the problem because the url takes length-1 but it pushes only if it doesn't exist
