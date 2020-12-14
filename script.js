@@ -16,7 +16,10 @@ var cities = []
     var uvCities = [
         //{berlin: {lat: "52.5244", lon: "13.4105"}}
       ]
+      for (i=0; i < localStorage.length; i++) {
+      cities.push(JSON.parse(localStorage.getItem(i)))}
 
+      renderHistory();
 
         $("#search").on("click", function(event) {
             event.preventDefault();
@@ -28,9 +31,12 @@ var cities = []
         console.log(city);
         console.log(cities);
 
+
         queryCity();
         renderHistory();
         })
+
+
 
         function queryCity() {
             $(".city").empty()
@@ -43,6 +49,9 @@ var cities = []
         method: "GET"
         }).then(function(response) {
             console.log((response))
+            if (response === "error") {
+                alert("That place does not exist! Try again")
+            }
             //$(".display").empty()
             uvCities.push(response.city.coord)
             var dateMain = new Date(response.list[0].dt * 1000).toDateString()
@@ -101,6 +110,13 @@ var cities = []
    // }
     //console.log(uvCities)
 
+    //for (i = 0; i < 10; i++) {
+        //localStorage.setItem(i, JSON.stringify(cities[i]))
+
+
+    //}
+
+
 
 function renderHistory() {
     $(".history").empty();
@@ -108,12 +124,17 @@ function renderHistory() {
     console.log(newSet)
     var historyList = Array.from(newSet)
     console.log(historyList)
+
+
+
 for (i = 0; i < historyList.length; i++) {
     
         var history = historyList[i]
+        localStorage.setItem(i, JSON.stringify(historyList[i]))
         
         var newCity = document.createElement("button")
-        newCity.textContent = history;
+        newCity.textContent = JSON.parse(localStorage.getItem(i))
+        //newCity.textContent = historyList[i];
         newCity.setAttribute("data-name", i);
         newCity.classList.add("list-group-item")
         newCity.classList.add("history-city")
