@@ -20,6 +20,7 @@ var cities = []
       cities.push(JSON.parse(localStorage.getItem(i)))}
 
       renderHistory();
+      queryCity();
 
         $("#search").on("click", function(event) {
             event.preventDefault();
