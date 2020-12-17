@@ -3,14 +3,12 @@ $(document).ready(function(){
     
     // This is our API key
     var APIKey = "166a433c57516f51dfab1f7edaed8413";
-    // Here we are building the URL we need to query the database
-    //var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&cnt=5&appid=" + APIKey;
-   // var city = $("#city-input").val().trim();
-      //request syntax
 
-      //airpollution url request
-//http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={API key}
 
+
+
+    // now must ensure that nothing happens if the city is not a city (don't add to history) 
+    // and also come up with message "this is not a city"
 
 var cities = []
     var uvCities = [
@@ -19,8 +17,10 @@ var cities = []
       for (i=0; i < localStorage.length; i++) {
       cities.push(JSON.parse(localStorage.getItem(i)))}
 
+      if (localStorage.length > 0) {
       renderHistory();
       queryCity();
+      }
 
         $("#search").on("click", function(event) {
             event.preventDefault();
@@ -40,7 +40,7 @@ var cities = []
 
 
         function queryCity() {
-            $(".city").empty()
+            //$(".city").empty()
 
 
            // var city = $(this).attr("data-name")
@@ -50,14 +50,15 @@ var cities = []
         method: "GET"
         }).then(function(response) {
             console.log((response))
-            if (response === "error") {
-                alert("That place does not exist! Try again")
-            }
+            //if (response.message) {
+                //alert("nope")
+                //$(".city").html("<h2>" + "This place does not exist! Try again." + "</h2>").attr("style", "color: red;");
+            //}
             //$(".display").empty()
             uvCities.push(response.city.coord)
             var dateMain = new Date(response.list[0].dt * 1000).toDateString()
             //WILL NEED TO REFORMAT DATE DISPLAY
-            $(".city").html("<h2>" + response.city.name + "</h2>" + " (" + dateMain + ")");
+            $(".city").html("<h2>" + response.city.name + "</h2>" + " (" + dateMain + ")").attr("style", "color: black;");
             $(".wind").text("Wind Speed: " + response.list[0].speed);
             $(".humidity").text("Humidity: " + response.list[0].humidity + "%");
             var tempF = (response.list[0].temp.day - 273.15) * 1.80 + 32;
@@ -67,16 +68,20 @@ var cities = []
             $(".forecast").empty()
             for ( i = 1; i < 6; i++) {
                 console.log(response.list[i].humidity)
-                var date = new Date(response.list[i].dt * 1000).toDateString()
+                var date = new Date(response.list[i].dt * 1000).toLocaleDateString("en-US")
 
                 console.log(date)
                 //var forecast = document.createElement("div")
                 //forecast.textContent = "Humidity: " + response.list[i].main.humidity
                 var temp = (response.list[i].temp.day - 273.15) * 1.80 + 32;
-                var forecast = $("<div>").html(date + "<br>" + "Humidity: " + response.list[i].humidity + "%" + "<br>" + "Temp: " + temp.toFixed(2) + "F").addClass("list-group-item").addClass("forecast-days")
+                var forecast = $("<div>").html("<h6>" + date + "</h6>" + "<p>" + "Humidity: " + response.list[i].humidity + "%" + "<br>" + "Temp: " + temp.toFixed(2) + "F" + "</p>").addClass("list-group-item").addClass("forecast-days")
                 $(".forecast").append(forecast)
+
+                
             }
-            queryUV()
+
+            if (response) {
+            queryUV() }
         })
     }
 
@@ -90,32 +95,23 @@ var cities = []
     }).then(function(response) {
         console.log(response)
         //MUST fix CLASS SO BACKGROUND of numbers only CHANGES COLOR WITH IF STATEMENT
-        var UV = $(".uv-index")
-        UV.text("UV Index: ")
-        var index = UV.append(" " + response.value).addClass("list-group-item");
-        if (response.value < 3) {
-            index.attr("style", "background-color: green;")
-        } else if (response.value > 2 && response.value < 6) {
-            index.addClass("moderate")
-        } else if (response.value > 5 && response.value < 8) {
-            index.addClass("high")
-        } else if (response.value > 7) {
-            index.addClass("very-high")
+        $(".uv-index").text("UV Index: ")
+        var index = response.value;
+        $("#uv-result").text(index)
+        if (index < 3) {
+            $("#uv-result").addClass("low")
+            //attr("style", "background-color: green;")
+        } else if (index > 2 && index < 6) {
+            $("#uv-result").addClass("moderate")
+        } else if (index > 5 && index < 8) {
+            $("#uv-result").addClass("high")
+        } else if (index > 7) {
+            $("#uv-result").addClass("very-high")
         }
 
     })
    
 }
-//for (i = 0; i < uvCities.length; i++) {
-  //  uvCities[i].attr("id", i)
-   // }
-    //console.log(uvCities)
-
-    //for (i = 0; i < 10; i++) {
-        //localStorage.setItem(i, JSON.stringify(cities[i]))
-
-
-    //}
 
 
 
@@ -170,5 +166,4 @@ for (i = 0; i < historyList.length; i++) {
 
 
 })
-//next steps: local storage, icons, uv index background color, capitalize first letter of cities in history
-//must take care of double values in the array Line 125 only partly solves the problem because the url takes length-1 but it pushes only if it doesn't exist
+//next steps: icons, uv index background color, capitalize first letter of cities in history

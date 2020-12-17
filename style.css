@@ -32,7 +32,7 @@ h1 {
 
 .low {
     padding: 0;
-    background-color: green;
+    background-color: lightgreen;
 }
 
 .moderate {
@@ -47,5 +47,10 @@ h1 {
 
 .very-high {
     padding: 0;
-    background-color: red;
+    background-color: rgb(255, 81, 0);
 }
+
+.uv-result {
+    float: left;
+}
+
