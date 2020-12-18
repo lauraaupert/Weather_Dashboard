@@ -66,7 +66,7 @@ var cities = []
             $(".city").html("<h2>" + response.city.name + "</h2>" + "<h5>" + dateMain + "</h5>").attr("style", "color: black;");
             $(".wind").text("Wind Speed: " + response.list[0].speed + " mph");
             $(".humidity").text("Humidity: " + response.list[0].humidity + "%");
-            $(".icon").attr("src", "http://openweathermap.org/img/wn/" + response.list[0].weather[0].icon + "@2x.png")
+            $(".icon").attr("src", "https://openweathermap.org/img/wn/" + response.list[0].weather[0].icon + "@2x.png")
             var tempF = (response.list[0].temp.day - 273.15) * 1.80 + 32;
 
             console.log(tempF)
@@ -96,7 +96,7 @@ var cities = []
 
     function queryUV () {
         //uv index
-    var queryURLindex = "http://api.openweathermap.org/data/2.5/uvi?lat=" + uvCities[uvCities.length-1].lat + "&lon=" + uvCities[uvCities.length-1].lon + "&appid=" + APIKey
+    var queryURLindex = "https://api.openweathermap.org/data/2.5/uvi?lat=" + uvCities[uvCities.length-1].lat + "&lon=" + uvCities[uvCities.length-1].lon + "&appid=" + APIKey
 
     $.ajax({
         url: queryURLindex,
