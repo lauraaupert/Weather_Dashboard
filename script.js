@@ -180,5 +180,14 @@ for (i = 0; i < historyList.length; i++) {
  })
 
 
+ $(document).ajaxError(function() {
+    $(".temp").empty()
+    $(".wind").empty()
+    $(".humidity").empty()
+    $(".icon").attr("src", "")
+    $(".uv-index").empty()
+    $(".forecast").empty()
+    $(".city").html("<h3>" + "This place does not exist. Try again." + "</h3>").attr("style", "color: red;")
+})
 
 })
