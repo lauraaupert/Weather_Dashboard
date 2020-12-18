@@ -1,14 +1,6 @@
 $(document).ready(function(){
 
-    $(document).ajaxError(function() {
-        $(".temp").empty()
-        $(".wind").empty()
-        $(".humidity").empty()
-        $(".icon").attr("src", "")
-        $(".uv-index").empty()
-        $(".forecast").empty()
-        $(".city").html("<h3>" + "This place does not exist. Try again." + "</h3>").attr("style", "color: red;")
-    })
+
     
     // This is our API key
     var APIKey = "166a433c57516f51dfab1f7edaed8413";
@@ -38,7 +30,7 @@ var cities = []
         $("#city-input").val("") 
         //city.attr("data-name", $("#city-input"))
        // city.charAt(0).toUpperCase()
-        cities.push(city); 
+        cities.push(city.charAt(0).toUpperCase() + city.slice(1)); 
         console.log(city);
         //console.log(cities);
         //.charAt(0).toUpperCase()
@@ -154,7 +146,7 @@ for (i = 0; i < historyList.length; i++) {
         localStorage.setItem(i, JSON.stringify(historyList[i]))
         
         var newCity = document.createElement("button")
-        newCity.textContent = JSON.parse(localStorage.getItem(i)).charAt(0).toUpperCase() + JSON.parse(localStorage.getItem(i)).slice(1)
+        newCity.textContent = JSON.parse(localStorage.getItem(i))
         //newCity.textContent = historyList[i];
         newCity.setAttribute("data-name", i);
         newCity.classList.add("list-group-item")
@@ -188,5 +180,14 @@ for (i = 0; i < historyList.length; i++) {
  })
 
 
+ $(document).ajaxError(function() {
+    $(".temp").empty()
+    $(".wind").empty()
+    $(".humidity").empty()
+    $(".icon").attr("src", "")
+    $(".uv-index").empty()
+    $(".forecast").empty()
+    $(".city").html("<h3>" + "This place does not exist. Try again." + "</h3>").attr("style", "color: red;")
+})
 
 })
