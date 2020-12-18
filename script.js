@@ -59,6 +59,7 @@ var cities = []
 
     
             uvCities.push(response.city.coord)
+            console.log(uvCities)
             var dateMain = new Date(response.list[0].dt * 1000).toDateString()
             //WILL NEED TO REFORMAT DATE DISPLAY
             $(".city").html("<h2>" + response.city.name + "</h2>" + "<h5>" + dateMain + "</h5>").attr("style", "color: black;");
@@ -83,14 +84,14 @@ var cities = []
 
             }
 
-            if (response.city.coord) {
-            queryUV() }
+            
+            queryUV() 
         })
     }
 
     function queryUV () {
         //uv index
-    var queryURLindex = "http://api.openweathermap.org/data/2.5/uvi?lat=" + uvCities[cities.length-1].lat + "&lon=" + uvCities[cities.length-1].lon + "&appid=" + APIKey
+    var queryURLindex = "http://api.openweathermap.org/data/2.5/uvi?lat=" + uvCities[uvCities.length-1].lat + "&lon=" + uvCities[uvCities.length-1].lon + "&appid=" + APIKey
 
     $.ajax({
         url: queryURLindex,
@@ -128,10 +129,21 @@ function renderHistory() {
     var historyList = Array.from(newSet)
     console.log(historyList)
 
+    console.log(uvCities)
+
+    var uvSet = new Set(uvCities)
+    console.log(uvSet)
+    var uvList = Array.from(uvSet)
+    console.log(uvList)
+
+    //var savedCoord = uvCities
+
 
 
 for (i = 0; i < historyList.length; i++) {
     
+
+    //localStorage.setItem("uv array", JSON.stringify(uvCities))
         var history = historyList[i]
         localStorage.setItem(i, JSON.stringify(historyList[i]))
         
@@ -151,7 +163,7 @@ for (i = 0; i < historyList.length; i++) {
     }
     console.log(newCity)
 
-
+    //queryCity()
  }
 }
  
