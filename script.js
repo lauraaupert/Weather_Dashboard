@@ -61,7 +61,7 @@ var cities = []
             uvCities.push(response.city.coord)
             var dateMain = new Date(response.list[0].dt * 1000).toDateString()
             //WILL NEED TO REFORMAT DATE DISPLAY
-            $(".city").html("<h2>" + response.city.name + "</h2>" + " (" + dateMain + ")").attr("style", "color: black;");
+            $(".city").html("<h2>" + response.city.name + "</h2>" + "<h5>" + dateMain + "</h5>").attr("style", "color: black;");
             $(".wind").text("Wind Speed: " + response.list[0].speed);
             $(".humidity").text("Humidity: " + response.list[0].humidity + "%");
             $(".icon").attr("src", "http://openweathermap.org/img/wn/" + response.list[0].weather[0].icon + "@2x.png")
@@ -83,7 +83,7 @@ var cities = []
 
             }
 
-            if (response) {
+            if (response.city.coord) {
             queryUV() }
         })
     }
@@ -98,19 +98,22 @@ var cities = []
     }).then(function(response) {
         console.log(response)
         //MUST fix CLASS SO BACKGROUND of numbers only CHANGES COLOR WITH IF STATEMENT
-        $(".uv-index").text("UV Index: ")
+        $(".uv-index").html("UV Index: ")
         var index = response.value;
-        $("#uv-result").text(index)
+
+        var UVi = $("<span>").text(index)
         if (index < 3) {
-            $("#uv-result").addClass("low")
-            //attr("style", "background-color: green;")
+            
+            UVi.addClass("low")
+            //UVi.attr("style", "background-color: green;")
         } else if (index > 2 && index < 6) {
-            $("#uv-result").addClass("moderate")
+            UVi.addClass("moderate")
         } else if (index > 5 && index < 8) {
-            $("#uv-result").addClass("high")
+            UVi.addClass("high")
         } else if (index > 7) {
-            $("#uv-result").addClass("very-high")
+            UVi.addClass("very-high")
         }
+        $(".uv-index").append(UVi)
 
     })
    

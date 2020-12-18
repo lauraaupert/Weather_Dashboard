@@ -30,27 +30,46 @@ h1 {
     font-size: small;
 }
 
+.uv-index {
+    margin-left: 140px;
+}
+
 .low {
-    padding: 0;
-    background-color: lightgreen;
+    padding: 10px;
+    background-color: rgb(29, 197, 29);
+    color: black;
+    border-radius: 15px;
+
 }
 
 .moderate {
-    padding: 0;
+    padding: 10px;
     background-color: yellow;
+    color: black;
+    border-radius: 15px;
+
 }
 
 .high {
-    padding: 0;
+    padding: 10px;
     background-color: orange;
+    color: black;
+    border-radius: 15px;
+
 }
 
 .very-high {
-    padding: 0;
-    background-color: rgb(255, 81, 0);
+    padding: 10px;
+    background-color: rgb(255, 30, 0);
+    color: black;
+    border-radius: 15px;
+
 }
 
-.uv-result {
+.icon {
     float: left;
+    padding-right: 40px;
+    padding-top: 20px;
 }
+
 
