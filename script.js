@@ -1,5 +1,14 @@
 $(document).ready(function(){
 
+    $(document).ajaxError(function() {
+        $(".temp").empty()
+        $(".wind").empty()
+        $(".humidity").empty()
+        $(".icon").attr("src", "")
+        $(".uv-index").empty()
+        $(".forecast").empty()
+        $(".city").html("<h3>" + "This place does not exist. Try again." + "</h3>").attr("style", "color: red;")
+    })
     
     // This is our API key
     var APIKey = "166a433c57516f51dfab1f7edaed8413";
@@ -91,17 +100,6 @@ var cities = []
         })
     
     }
-    $(document).ajaxError(function() {
-        $(".temp").empty()
-        $(".wind").empty()
-        $(".humidity").empty()
-        $(".icon").attr("src", "")
-        $(".uv-index").empty()
-        $(".forecast").empty()
-        $(".city").html("<h3>" + "This place does not exist. Try again." + "</h3>").attr("style", "color: red;")
-        
-
-    })
 
 
     function queryUV () {
