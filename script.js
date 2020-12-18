@@ -85,9 +85,24 @@ var cities = []
             }
 
             
-            queryUV() 
+            queryUV()
+            
+        
         })
+    
     }
+    $(document).ajaxError(function() {
+        $(".temp").empty()
+        $(".wind").empty()
+        $(".humidity").empty()
+        $(".icon").attr("src", "")
+        $(".uv-index").empty()
+        $(".forecast").empty()
+        $(".city").html("<h3>" + "This place does not exist. Try again." + "</h3>").attr("style", "color: red;")
+        
+
+    })
+
 
     function queryUV () {
         //uv index
@@ -130,13 +145,6 @@ function renderHistory() {
     console.log(historyList)
 
     console.log(uvCities)
-
-    var uvSet = new Set(uvCities)
-    console.log(uvSet)
-    var uvList = Array.from(uvSet)
-    console.log(uvList)
-
-    //var savedCoord = uvCities
 
 
 
@@ -184,4 +192,3 @@ for (i = 0; i < historyList.length; i++) {
 
 
 })
-//next steps: icons, uv index background color, capitalize first letter of cities in history
