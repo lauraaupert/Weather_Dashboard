@@ -25,13 +25,14 @@ var cities = []
         $("#search").on("click", function(event) {
             event.preventDefault();
             console.dir(event)
-        var city = $("#city-input").val().trim();
-        $("#city-input").val("")
+        var city = $("#city-input").val().trim(); 
+        $("#city-input").val("") 
         //city.attr("data-name", $("#city-input"))
-        cities.push(city);
+       // city.charAt(0).toUpperCase()
+        cities.push(city); 
         console.log(city);
-        console.log(cities);
-
+        //console.log(cities);
+        //.charAt(0).toUpperCase()
 
         queryCity();
         renderHistory();
@@ -55,6 +56,8 @@ var cities = []
                 //$(".city").html("<h2>" + "This place does not exist! Try again." + "</h2>").attr("style", "color: red;");
             //}
             //$(".display").empty()
+
+    
             uvCities.push(response.city.coord)
             var dateMain = new Date(response.list[0].dt * 1000).toDateString()
             //WILL NEED TO REFORMAT DATE DISPLAY
@@ -130,7 +133,7 @@ for (i = 0; i < historyList.length; i++) {
         localStorage.setItem(i, JSON.stringify(historyList[i]))
         
         var newCity = document.createElement("button")
-        newCity.textContent = JSON.parse(localStorage.getItem(i))
+        newCity.textContent = JSON.parse(localStorage.getItem(i)).charAt(0).toUpperCase() + JSON.parse(localStorage.getItem(i)).slice(1)
         //newCity.textContent = historyList[i];
         newCity.setAttribute("data-name", i);
         newCity.classList.add("list-group-item")
