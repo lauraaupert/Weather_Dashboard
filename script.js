@@ -64,23 +64,23 @@ var cities = []
             var dateMain = new Date(response.list[0].dt * 1000).toDateString()
             //WILL NEED TO REFORMAT DATE DISPLAY
             $(".city").html("<h2>" + response.city.name + "</h2>" + "<h5>" + dateMain + "</h5>").attr("style", "color: black;");
-            $(".wind").text("Wind Speed: " + response.list[0].speed);
+            $(".wind").text("Wind Speed: " + response.list[0].speed + " mph");
             $(".humidity").text("Humidity: " + response.list[0].humidity + "%");
             $(".icon").attr("src", "http://openweathermap.org/img/wn/" + response.list[0].weather[0].icon + "@2x.png")
             var tempF = (response.list[0].temp.day - 273.15) * 1.80 + 32;
 
             console.log(tempF)
-            $(".temp").text("Temperature: " + tempF.toFixed(2) + "F");
+            $(".temp").text("Temperature: " + tempF.toFixed(2) + " F");
             $(".forecast").empty()
             for ( i = 1; i < 6; i++) {
                 console.log(response.list[i].humidity)
-                var icon = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.list[i].weather[0].icon + "@2x.png").addClass("image")
+                var icon = $("<img>").attr("src", "https://openweathermap.org/img/wn/" + response.list[i].weather[0].icon + "@2x.png").addClass("image")
 
                 var date = new Date(response.list[i].dt * 1000).toLocaleDateString("en-US")
 
                 console.log(icon)
                 var temp = (response.list[i].temp.day - 273.15) * 1.80 + 32;
-                var forecast = $("<div>").html("<h6>" + date + "</h6>" + "<br>" + "<p>" + "Humidity: " + response.list[i].humidity + "%" + "<br>" + "Temp: " + temp.toFixed(2) + "F" + "</p>").addClass("list-group-item").addClass("forecast-days").append(icon)
+                var forecast = $("<div>").html("<h6>" + date + "</h6>" + "<br>" + "<p>" + "Humidity: " + response.list[i].humidity + "%" + "<br>" + "Temp: " + temp.toFixed(2) + " F" + "</p>").addClass("list-group-item").addClass("forecast-days").append(icon)
                 $(".forecast").append(forecast)
 
             }
