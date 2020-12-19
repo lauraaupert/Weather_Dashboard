@@ -16,8 +16,11 @@ if (localStorage.length > 0) {
 $("#search").on("click", function(event) {
     event.preventDefault();
     var city = $("#city-input").val().trim(); 
+    if (city) {
+        cities.push(city.charAt(0).toUpperCase() + city.slice(1)); 
+    }
+
     $("#city-input").val("");
-    cities.push(city.charAt(0).toUpperCase() + city.slice(1)); 
 
     queryCity();
     renderHistory();

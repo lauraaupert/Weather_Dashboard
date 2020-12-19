@@ -26,7 +26,7 @@ h1 {
     width: 18%;
     float: left;
     color: white;
-    text-align: left;
+    justify-content: center;
     font-size: small;
 }
 
@@ -72,4 +72,7 @@ h1 {
     padding-top: 20px;
 }
 
+.image {
+    width: 100%
+}
 
