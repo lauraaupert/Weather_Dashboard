@@ -94,7 +94,6 @@ function renderHistory() {
         newCity.classList.add("history-city")
         
         $(".history").prepend(newCity);
-
     }
 }
  
