@@ -7,4 +7,5 @@ What I learned and challenges I faced: I had to learn to use the unix date forma
 
 Link: https: //lauraaupert.github.io/Weather_Dashboard/
 
-Screenshot: ./Assets/WeatherApp.png
+Screenshot: ![image](https://user-images.githubusercontent.com/73617474/102698406-f906a300-420a-11eb-9265-4e21a6c577ac.png)
+
