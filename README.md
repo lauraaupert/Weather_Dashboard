@@ -1,4 +1,4 @@
-#Weather Dashboard App
+Weather Dashboard App
 
 This weather dashboard displays the meteorological conditions of any city in the world: temperature, wind speed, humidity, and UV index. It also gives a 5-day forecast with humidity and temperature. The user can search for a city so that the screen displays the information. The city is then added to the history of searched cities and rendered again when the page is reloaded. If the user searches for a city that does not exist or misspells the city name, an error message will show. If the user clicks the search button while the input field is empty, nothing will happen. Once the search button is clicked, the input field will be emptied. 
 This app uses two separate APIs from OpenWeatherMap: the 16-day forecast API (with a count of 6) and the UV index API. The search button triggers the forecast API request, which stores the coordinates of the target city, and in turn triggers a UV index API request to obtain the UV information from those coordinates. 
